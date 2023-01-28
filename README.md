@@ -26,7 +26,7 @@ import ImageViewer from "react-native-gesture-image-view";
 ## Props options
 | Name | Type | Desc | 
 | --- | --- | --- |
-|image| Require| The Image file.
+|image| Require or string | The Image file.
 |resizeMode| ImageResizeMode| Image resize mode.
 |style| StyleProp| Style of the image container.
 |zoomReset| boolean| Reset zoom when the user stops using the zoom gesture.
