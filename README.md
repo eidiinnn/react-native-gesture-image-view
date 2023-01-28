@@ -12,7 +12,7 @@ npm i react-native-gesture-handler
 ## Usage
 
 ```js
-import { ImageViewer } from "react-native-gesture-image-view";
+import ImageViewer from "react-native-gesture-image-view";
 
 // ...
 

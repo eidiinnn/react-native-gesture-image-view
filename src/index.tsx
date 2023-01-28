@@ -40,8 +40,8 @@ export default function ImageViewer(props: Props) {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+    <GestureHandlerRootView>
+      <View>
         <GestureDetector gesture={composed}>
           <Animated.Image
             style={[gestureStyle, styles.image]}
