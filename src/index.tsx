@@ -14,7 +14,7 @@ import {
 } from 'react-native-gesture-handler';
 
 type Props = {
-  image: any;
+  image: any | string;
   resizeMode?: ImageResizeMode;
   style?: StyleProp<ImageStyle>;
   zoomReset?: boolean;
@@ -46,7 +46,11 @@ export default function ImageViewer(props: Props) {
           <Animated.Image
             style={[gestureStyle, styles.image]}
             resizeMode={props.resizeMode || 'contain'}
-            source={props.image}
+            source={
+              typeof props.image === 'string'
+                ? { uri: props.image }
+                : props.image
+            }
           />
         </GestureDetector>
       </View>
