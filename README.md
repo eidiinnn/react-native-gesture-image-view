@@ -1,26 +1,29 @@
 # react-native-gesture-image-view
 
-Image view with gestures
+Image view with gesture for React native
 
 ## Installation
 
 ```sh
-npm install react-native-gesture-image-view
+npm i react-native-gesture-image-view
+npm i react-native-gesture-handler
 ```
 
 ## Usage
 
 ```js
-import { GestureImageViewView } from "react-native-gesture-image-view";
+import { ImageViewer } from "react-native-gesture-image-view";
 
 // ...
 
-<GestureImageViewView color="tomato" />
+ <ImageViewer
+  zoomEnable={true}
+  moveEnable={true}
+  zoomReset={false}
+  image={require('image.jpg')}
+  style={styles.box}
+/>
 ```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## License
 
