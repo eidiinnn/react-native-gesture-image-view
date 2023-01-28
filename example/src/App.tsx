@@ -1,12 +1,18 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { GestureImageViewView } from 'react-native-gesture-image-view';
+import ImageViewer from 'react-native-gesture-image-view';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <GestureImageViewView color="#32a852" style={styles.box} />
+      <ImageViewer
+        zoomEnable={true}
+        moveEnable={true}
+        zoomReset={false}
+        image={require('../image/testImage.jpg')}
+        style={styles.box}
+      />
     </View>
   );
 }

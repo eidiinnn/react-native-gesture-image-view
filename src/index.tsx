@@ -1,26 +1,61 @@
+import React from 'react';
 import {
-  requireNativeComponent,
-  UIManager,
-  Platform,
-  ViewStyle,
+  StyleSheet,
+  ImageResizeMode,
+  ImageStyle,
+  StyleProp,
+  View,
+  Animated,
 } from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-const LINKING_ERROR =
-  `The package 'react-native-gesture-image-view' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo Go\n';
-
-type GestureImageViewProps = {
-  color: string;
-  style: ViewStyle;
+type Props = {
+  image: any;
+  resizeMode?: ImageResizeMode;
+  style?: StyleProp<ImageStyle>;
+  zoomReset?: boolean;
+  moveReset?: boolean;
+  zoomEnable?: boolean;
+  moveEnable?: boolean;
 };
+import PanGesture from './gestures/pan';
+import PichGesture from './gestures/pich';
 
-const ComponentName = 'GestureImageViewView';
+export default function ImageViewer(props: Props) {
+  const pan = new PanGesture(props.moveReset);
+  const pich = new PichGesture(props.zoomReset);
 
-export const GestureImageViewView =
-  UIManager.getViewManagerConfig(ComponentName) != null
-    ? requireNativeComponent<GestureImageViewProps>(ComponentName)
-    : () => {
-        throw new Error(LINKING_ERROR);
-      };
+  const composed = Gesture.Simultaneous(pan.getGesture, pich.pichGesture);
+
+  const gestureStyle = {
+    transform: [
+      { translateX: !props.moveEnable ? 0 : pan.x },
+      { translateY: !props.moveEnable ? 0 : pan.y },
+      { scale: !props.zoomEnable ? 1 : pich.scale },
+    ],
+  };
+
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <GestureDetector gesture={composed}>
+          <Animated.Image
+            style={[gestureStyle, styles.image]}
+            resizeMode={props.resizeMode || 'contain'}
+            source={props.image}
+          />
+        </GestureDetector>
+      </View>
+    </GestureHandlerRootView>
+  );
+}
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+  },
+});
