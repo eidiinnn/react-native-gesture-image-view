@@ -1,5 +1,6 @@
 # react-native-gesture-image-view
 
+<img src="https://github.com/eidiinnn/images/blob/main/untitled-min.gif" width="auto" height="350" />
 Image view with gesture for React native.
 
 ## Installation
